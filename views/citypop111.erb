@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+
+    <title>Urban Population by Percent of Total Population</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Who lives in cities? </h1>
+        <p>So. Many. People. You guys, more people are living in urban environments now than at any previous point in history. Let's take a look at the nations of the world and review what percentage of their population lives in cities.</p>
+          </div>
+            <table class="table table-striped">
+              <% @stats.each do |nation| %>
+              <tr>
+                <td><%= nation.css('.views-field-country-value').text.strip %></td>
+                <td><%= nation.css('.wbapi-data-value-last').text.strip.to_i %></td>
+                <td><%= if nation.css('.wbapi-data-value-last').text.strip.to_i.between?(1, 9)
+                        @icons = " "
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(10, 19)
+                        @icons = "*"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(20, 29)
+                        @icons = "**"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(30, 39)
+                        @icons = "***"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(40, 49)
+                        @icons = "****"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(50, 59)
+                        @icons = "*****"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(60, 69)
+                        @icons = "******"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(70, 79)
+                        @icons = "*******"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(80, 89)
+                        @icons = "********"
+                      elsif nation.css('.wbapi-data-value-last').text.strip.to_i.between?(90, 100)
+                        @icons = "*********"
+                      else puts 
+                        "Did not report this year"
+                      end %></td>
+              </tr>
+              <% end %>
+            </table>
+			     </div>
+      <footer>
+        <p>&copy; Anne Cahalan 2013</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../assets/js/jquery.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
